@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-HK" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEMENTS 商會 - 香港中小學服務推廣平台</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+HK:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            900: '#0a3651',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans HK', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" onclick="navigateToHome(); return false;" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 bg-gradient-to-tr from-brand-700 to-brand-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                        E
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-tight text-slate-900 block leading-tight">ELEMENTS 商會</span>
+                        <span class="text-xs text-brand-600 font-medium">中小學教育服務資源平台</span>
+                    </div>
+                </a>
+
+                <div class="flex items-center space-x-3">
+                    <a href="https://forms.gle/c5s6uNUGQnP4tCch6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-2.5 border border-transparent text-xs font-semibold rounded-lg text-white bg-brand-600 hover:bg-brand-700 shadow-sm transition">
+                        <i class="fa-solid fa-plus-circle mr-1.5"></i> 會員提交服務
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- VIEW 1: MAIN HOME DIRECTORY PAGE -->
+    <div id="homeView" class="view-section">
+        <section class="bg-gradient-to-b from-brand-900 via-brand-800 to-slate-900 text-white py-14">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium bg-brand-500/20 text-brand-100 border border-brand-400/30 mb-4">
+                    <i class="fa-solid fa-graduation-cap mr-2"></i> 香港中小學校長、主任及老師一站式資源庫
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                    匯聚優質會員資源<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-amber-300">賦能香港中小學多元發展</span>
+                </h1>
+                <p class="mt-3 text-sm sm:text-base text-slate-300 font-light max-w-2xl mx-auto">
+                    精選商會會員機構提供之 STEM 科技、體育、心理健康及教師培訓項目。點擊項目即可瀏覽完整會員介紹與學校成功案例。
+                </p>
+            </div>
+        </section>
+
+        <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Search & Filters -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200/80 mb-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900">學校服務與會員目錄</h2>
+                    <p class="text-sm text-slate-500 mt-1">找到適合貴校學生及教職員的多元化活動與課程</p>
+                </div>
+
+                <div class="relative w-full mb-6">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i>
+                    <input type="text" id="searchInput" placeholder="搜尋服務、機構名稱或關鍵字..." class="w-full pl-11 pr-4 py-3.5 text-sm bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition">
+                </div>
+
+                <hr class="border-slate-100 my-6">
+
+                <div class="space-y-4">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider min-w-[80px]">服務類別:</span>
+                        <button class="category-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 text-white transition shadow-sm" data-category="all">全部類別</button>
+                        <button class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-category="STEM / 科技教育">STEM / 科技教育</button>
+                        <button class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-category="體育發展 / 運動">體育發展 / 運動</button>
+                        <button class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-category="心理健康 / 輔導">心理健康 / 輔導</button>
+                        <button class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-category="藝術與文化">藝術與文化</button>
+                        <button class="category-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-category="教師培訓 / 講座">教師培訓 / 講座</button>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider min-w-[80px]">適合對象:</span>
+                        <button class="target-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-white transition shadow-sm" data-target="all">所有對象</button>
+                        <button class="target-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="小學">小學</button>
+                        <button class="target-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="中學">中學</button>
+                        <button class="target-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition" data-target="教職員 / 家長">教職員 / 家長</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-6 px-1">
+                <p class="text-sm text-slate-500 font-medium">顯示 <span id="itemCount" class="text-brand-600 font-bold">0</span> 個符合條件的會員服務</p>
+                <button id="resetFilters" class="text-xs text-slate-400 hover:text-slate-600 underline">重置所有篩選</button>
+            </div>
+
+            <div id="loadingSpinner" class="text-center py-16">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-600 mb-3"></i>
+                <p class="text-xs text-slate-400">正在同步加載最新會員資料...</p>
+            </div>
+
+            <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+
+            <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-slate-300 my-6">
+                <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+                <h3 class="text-base font-bold text-slate-700">未有找到符合條件的會員項目</h3>
+                <p class="text-sm text-slate-400 mt-1">請嘗試調整關鍵字或分類條件</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- VIEW 2: MEMBER PROFILE DETAIL PAGE (SPA) -->
+    <div id="memberDetailView" class="view-section hidden flex-grow bg-slate-50 pb-16">
+        <div class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+                <button onclick="navigateToHome(); return false;" class="inline-flex items-center text-sm font-semibold text-brand-600 hover:text-brand-800 transition">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> 返回服務目錄
+                </button>
+                <button onclick="shareMemberPage()" class="text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 transition">
+                    <i class="fa-solid fa-share-nodes mr-1.5"></i> 分享此專頁
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+            <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
+                <div class="p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-brand-900 text-white flex flex-col sm:flex-row items-center gap-6">
+                    <img id="detailAvatar" src="" alt="Avatar" class="w-24 h-24 rounded-2xl object-cover border-2 border-white/20 shadow-md bg-slate-800 shrink-0">
+                    <div class="space-y-2 text-center sm:text-left">
+                        <span id="detailCategory" class="px-3 py-1 text-xs font-bold bg-brand-500 text-white rounded-md inline-block">專業領域</span>
+                        <h1 id="detailName" class="text-2xl sm:text-3xl font-extrabold">會員姓名</h1>
+                        <p id="detailCompany" class="text-sm text-slate-300 font-medium">機構/公司名稱</p>
+                        <p id="detailYearJoined" class="text-xs text-brand-200"></p>
+                    </div>
+                </div>
+
+                <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-6">
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center">
+                                <i class="fa-solid fa-address-card text-brand-600 mr-2"></i> 個人 / 機構簡介
+                            </h3>
+                            <div id="detailBio" class="text-sm text-slate-600 leading-relaxed whitespace-pre-line bg-slate-50 p-5 rounded-2xl border border-slate-100"></div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center">
+                                <i class="fa-solid fa-bullseye text-brand-600 mr-2"></i> 服務範圍 / 對象 / 期望對接
+                            </h3>
+                            <div id="detailTargetAudience" class="text-sm text-slate-700 bg-amber-50/60 p-4 rounded-2xl border border-amber-100"></div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center">
+                                <i class="fa-solid fa-certificate text-brand-600 mr-2"></i> 證書及專業資格
+                            </h3>
+                            <div id="detailCertifications" class="text-sm text-slate-600 bg-slate-50 p-4 rounded-2xl border border-slate-100 whitespace-pre-line"></div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-3 flex items-center">
+                                <i class="fa-solid fa-images text-brand-600 mr-2"></i> 業務及成功案例相冊
+                            </h3>
+                            <div id="detailGallery" class="grid grid-cols-2 sm:grid-cols-3 gap-4"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                            <h3 class="font-bold text-slate-900 text-base border-b border-slate-200 pb-2">機構聯絡資料</h3>
+                            <div class="space-y-3 text-xs text-slate-700">
+                                <p id="detailPhone" class="flex items-center"><i class="fa-solid fa-phone w-6 text-brand-600"></i> -</p>
+                                <p id="detailEmail" class="flex items-center"><i class="fa-solid fa-envelope w-6 text-brand-600"></i> -</p>
+                                <p id="detailAddress" class="flex items-start"><i class="fa-solid fa-location-dot w-6 text-brand-600 mt-0.5"></i> <span id="detailAddressText">-</span></p>
+                                <p id="detailWebsite" class="flex items-center"><i class="fa-solid fa-globe w-6 text-brand-600"></i> -</p>
+                            </div>
+                            <hr class="border-slate-200 my-4">
+                            <a id="whatsappBtn" href="#" target="_blank" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center">
+                                <i class="fa-brands fa-whatsapp text-base mr-2"></i> WhatsApp 直接查詢
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 👉 請在此處替換為你第一步發佈的 Google Apps Script API 網址
+        const API_URL = "YOUR_APPS_SCRIPT_URL";
+
+        let servicesData = [];
+        let currentCategory = 'all';
+        let currentTarget = 'all';
+        let searchQuery = '';
+
+        const categoryBanners = {
+            'STEM / 科技教育': 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80',
+            '體育發展 / 運動': 'https://images.unsplash.com/photo-1547447134-cd3f5c716030?w=800&auto=format&fit=crop&q=80',
+            '心理健康 / 輔導': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
+            '藝術與文化': 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=800&auto=format&fit=crop&q=80',
+            '教師培訓 / 講座': 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80',
+            'default': 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80'
+        };
+
+        const homeView = document.getElementById('homeView');
+        const memberDetailView = document.getElementById('memberDetailView');
+        const servicesGrid = document.getElementById('servicesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const itemCount = document.getElementById('itemCount');
+        const emptyState = document.getElementById('emptyState');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // 從 Apps Script 動態 Fetch 資料
+        async function fetchMembersData() {
+            try {
+                const res = await fetch(API_URL);
+                servicesData = await res.json();
+                if (loadingSpinner) loadingSpinner.classList.add('hidden');
+                if (servicesGrid) servicesGrid.classList.remove('hidden');
+                handleRouting();
+            } catch (err) {
+                console.error("Fetch Data Error:", err);
+                if (loadingSpinner) loadingSpinner.innerHTML = `<p class="text-xs text-red-500">載入數據失敗，請稍後重試。</p>`;
+            }
+        }
+
+        function navigateToHome() {
+            history.pushState("", document.title, window.location.pathname + window.location.search);
+            window.location.hash = '';
+            showHomeView();
+        }
+
+        function navigateToMember(id) {
+            window.location.hash = `#${id}`;
+        }
+
+        function handleRouting() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#member-')) {
+                const memberId = hash.replace('#', '');
+                showMemberDetail(memberId);
+            } else {
+                showHomeView();
+            }
+        }
+
+        function showHomeView() {
+            if (memberDetailView && homeView) {
+                memberDetailView.classList.add('hidden');
+                homeView.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                renderServices();
+            }
+        }
+
+        function showMemberDetail(id) {
+            const item = servicesData.find(s => s.id === id);
+            if (!item) {
+                showHomeView();
+                return;
+            }
+
+            document.getElementById('detailName').textContent = item.name;
+            document.getElementById('detailCompany').textContent = item.company || '個人會員';
+            document.getElementById('detailCategory').textContent = item.category || '專業會員';
+            document.getElementById('detailYearJoined').textContent = item.yearJoined ? `加入年份：${item.yearJoined}` : '';
+            document.getElementById('detailBio').textContent = item.bio || '暫未提供簡介';
+            document.getElementById('detailTargetAudience').textContent = item.targetAudience || '未指定';
+            document.getElementById('detailCertifications').textContent = item.certifications || '未提供';
+            
+            const avatarUrl = item.avatar && item.avatar.trim() !== '' 
+                ? item.avatar 
+                : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80';
+            document.getElementById('detailAvatar').src = avatarUrl;
+
+            document.getElementById('detailPhone').innerHTML = `<i class="fa-solid fa-phone w-6 text-brand-600"></i> ${item.phone || '-'}`;
+            document.getElementById('detailEmail').innerHTML = `<i class="fa-solid fa-envelope w-6 text-brand-600"></i> ${item.email || '-'}`;
+            document.getElementById('detailAddressText').textContent = item.address || '-';
+            document.getElementById('detailWebsite').innerHTML = `<i class="fa-solid fa-globe w-6 text-brand-600"></i> ${item.website || '-'}`;
+            
+            const waBtn = document.getElementById('whatsappBtn');
+            if (waBtn) {
+                if (item.phone) {
+                    waBtn.href = `https://wa.me/852${item.phone}?text=你好 ${encodeURIComponent(item.name)}，我是學校代表，在 ELEMENTS 商會平台看到貴公司的服務資訊。`;
+                    waBtn.classList.remove('pointer-events-none', 'opacity-50');
+                } else {
+                    waBtn.href = "#";
+                    waBtn.classList.add('pointer-events-none', 'opacity-50');
+                }
+            }
+
+            const galleryEl = document.getElementById('detailGallery');
+            if (galleryEl) {
+                if (item.gallery && item.gallery.length > 0) {
+                    galleryEl.innerHTML = item.gallery.map(imgUrl => `
+                        <div class="h-36 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+                            <img src="${imgUrl}" alt="Gallery" class="w-full h-full object-cover hover:scale-105 transition">
+                        </div>
+                    `).join('');
+                } else {
+                    galleryEl.innerHTML = `<p class="text-xs text-slate-400 col-span-3">暫未提供相冊相片</p>`;
+                }
+            }
+
+            homeView.classList.add('hidden');
+            memberDetailView.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderServices() {
+            if (!servicesGrid) return;
+
+            const filtered = servicesData.filter(item => {
+                const query = searchQuery.toLowerCase();
+                const matchesCategory = currentCategory === 'all' || (item.category && item.category.includes(currentCategory));
+                const matchesTarget = currentTarget === 'all' || (item.targetAudience && item.targetAudience.includes(currentTarget));
+                const matchesSearch = (item.name || '').toLowerCase().includes(query) ||
+                                      (item.company || '').toLowerCase().includes(query) ||
+                                      (item.category || '').toLowerCase().includes(query) ||
+                                      (item.bio || '').toLowerCase().includes(query);
+                return matchesCategory && matchesTarget && matchesSearch;
+            });
+
+            if (itemCount) itemCount.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                servicesGrid.innerHTML = '';
+                if (emptyState) emptyState.classList.remove('hidden');
+                return;
+            }
+
+            if (emptyState) emptyState.classList.add('hidden');
+
+            servicesGrid.innerHTML = filtered.map(item => {
+                const coverUrl = (item.gallery && item.gallery.length > 0 && item.gallery[0].trim() !== '')
+                    ? item.gallery[0]
+                    : (categoryBanners[item.category] || categoryBanners['default']);
+
+                let targetTag = '中小學';
+                if (item.targetAudience) {
+                    if (item.targetAudience.includes('小學')) targetTag = '小學';
+                    else if (item.targetAudience.includes('中學')) targetTag = '中學';
+                    else if (item.targetAudience.includes('教職員') || item.targetAudience.includes('家長')) targetTag = '教職員 / 家長';
+                }
+
+                return `
+                <div onclick="navigateToMember('${item.id}')" class="bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between group">
+                    <div>
+                        <div class="h-48 w-full relative overflow-hidden bg-slate-100">
+                            <img src="${coverUrl}" alt="${item.company}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3.5 py-1.5 text-xs font-bold bg-white/95 backdrop-blur-md text-slate-800 rounded-xl shadow-md">
+                                    ${item.category || '專業服務'}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="flex items-center space-x-2.5 mb-3">
+                                <div class="w-6 h-6 rounded-lg bg-brand-600 text-white flex items-center justify-center text-xs font-bold shrink-0">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+                                <span class="text-xs font-semibold text-slate-500 truncate">${item.company}</span>
+                            </div>
+
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1 mb-2">
+                                ${item.name} 提供的服務
+                            </h3>
+
+                            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                                ${item.bio || '暫未提供簡介。'}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-xs font-medium text-slate-500 flex items-center">
+                            <i class="fa-solid fa-graduation-cap mr-1.5 text-slate-400"></i>${targetTag}
+                        </span>
+                        <span class="text-xs font-bold text-brand-600 group-hover:translate-x-1 transition-transform flex items-center">
+                            專頁詳情 <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                        </span>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function shareMemberPage() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("已複製專頁網址！可以直接發送給校長或老師。");
+            });
+        }
+
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-brand-600', 'text-white');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
+                });
+                btn.classList.add('active', 'bg-brand-600', 'text-white');
+                currentCategory = btn.dataset.category;
+                renderServices();
+            });
+        });
+
+        document.querySelectorAll('.target-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.target-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-slate-900', 'text-white');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
+                });
+                btn.classList.add('active', 'bg-slate-900', 'text-white');
+                currentTarget = btn.dataset.target;
+                renderServices();
+            });
+        });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderServices();
+            });
+        }
+
+        const resetBtn = document.getElementById('resetFilters');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                currentCategory = 'all';
+                currentTarget = 'all';
+                searchQuery = '';
+                if (searchInput) searchInput.value = '';
+                
+                document.querySelectorAll('.category-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-brand-600', 'text-white');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
+                });
+                document.querySelector('.category-btn[data-category="all"]').classList.add('active', 'bg-brand-600', 'text-white');
+
+                document.querySelectorAll('.target-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-slate-900', 'text-white');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
+                });
+                document.querySelector('.target-btn[data-target="all"]').classList.add('active', 'bg-slate-900', 'text-white');
+
+                renderServices();
+            });
+        }
+
+        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('DOMContentLoaded', fetchMembersData);
+    </script>
+</body>
+</html>
